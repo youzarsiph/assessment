@@ -1,31 +1,77 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import MenuItem from "../components/MenuItem";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { FlashList } from "@shopify/flash-list";
 
 export default function TabTwoScreen() {
+  const categories = ["Starters", "Mains", "Appetizers", "Desserts"];
+
+  const menuitems = [
+    {
+      title: "Greek Salad",
+      price: 12.99,
+      source: require("../assets/images/items/GreekSalad.png"),
+      description: "Greek Salad at your hands",
+    },
+    {
+      title: "Bruschetta",
+      price: 7.99,
+      source: require("../assets/images/items/Bruschetta.png"),
+      description: "Greek Salad at your hands",
+    },
+  ];
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
-    </View>
+    <ScrollView>
+      <View style={styles.filters}>
+        {categories.map((item) => {
+          return (
+            <View key={item}>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => {
+                  console.log(item);
+                }}
+                style={styles.filterItem}
+              >
+                <Text>{item}</Text>
+              </TouchableOpacity>
+            </View>
+          );
+        })}
+      </View>
+      <View style={styles.container}>
+        <FlashList
+          data={menuitems}
+          renderItem={(item) => <MenuItem {...item.item} />}
+          estimatedItemSize={10}
+        />
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 16,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  filters: {
+    paddingVertical: 16,
+    flexDirection: "row",
+    backgroundColor: "#fff",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  filterItem: {
+    marginLeft: 8,
+    borderRadius: 20,
+    color: "#495e57",
+    fontWeight: "bold",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: "#495e5722",
   },
 });

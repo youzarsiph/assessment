@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "LittleLemonRestaurant",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -18,10 +18,10 @@
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "expo": "~47.0.6",
-    "expo-asset": "~8.6.2",
+    "expo-asset": "~8.7.0",
     "expo-constants": "~14.0.2",
     "expo-font": "~11.0.1",
-    "expo-linking": "~3.2.3",
+    "expo-linking": "~3.3.0",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "expo-system-ui": "~2.0.1",
@@ -31,7 +31,10 @@
     "react-native": "0.70.5",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "~3.18.0",
-    "react-native-web": "~0.18.9"
+    "react-native-web": "~0.18.9",
+    "expo-sqlite": "~11.0.0",
+    "expo-secure-store": "~12.0.0",
+    "@shopify/flash-list": "1.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

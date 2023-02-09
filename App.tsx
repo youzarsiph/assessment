@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import Navigation from "./navigation";
+import useColorScheme from "./hooks/useColorScheme";
+import useCachedResources from "./hooks/useCachedResources";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
