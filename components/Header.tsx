@@ -1,45 +1,59 @@
-import React from "react";
-import { View, Image, TouchableHighlight, StyleSheet } from "react-native";
-import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs";
+/**
+ * Header
+ */
 
-export default function Header(props: BottomTabHeaderProps) {
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.img}
-        source={require("../assets/images/header.png")}
-      />
-      <TouchableHighlight
-        onPress={() => {
-          props.navigation.navigate("Modal");
-        }}
-        style={{ borderRadius: 100 }}
-      >
-        <Image
-          style={styles.profileImg}
-          source={require("../assets/images/profile.jpg")}
-        />
-      </TouchableHighlight>
-    </View>
-  );
+import React from "react";
+import { Appbar, AppbarHeaderProps, Menu } from "react-native-paper";
+import { NativeStackHeaderProps } from "@react-navigation/native-stack";
+
+interface HeaderProps extends NativeStackHeaderProps {
+  headerProps?: AppbarHeaderProps;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingBottom: 10,
-    paddingTop: 40,
-  },
-  img: {
-    height: 45,
-    width: 160,
-  },
-  profileImg: {
-    height: 45,
-    width: 45,
-    borderRadius: 100,
-  },
-});
+const Header = (props: HeaderProps) => {
+  const [visible, setVisible] = React.useState<boolean>(false);
+
+  return (
+    <Appbar.Header {...props.headerProps}>
+      {props.back && (
+        <Appbar.BackAction onPress={() => props.navigation.goBack()} />
+      )}
+
+      <Appbar.Content title={props.options.title || props.route.name} />
+
+      {props.route.name === "settings" ? undefined : (
+        <Menu
+          visible={visible}
+          onDismiss={() => setVisible(false)}
+          anchor={
+            <Appbar.Action
+              icon="dots-vertical"
+              onPress={() => setVisible(true)}
+            />
+          }
+        >
+          <Menu.Item
+            title="Account"
+            leadingIcon={"account"}
+            onPress={() => {
+              setVisible(false);
+              props.navigation.navigate("account");
+            }}
+          />
+          <Menu.Item
+            title="Settings"
+            leadingIcon={"cog"}
+            onPress={() => {
+              setVisible(false);
+              props.navigation.navigate("settings");
+            }}
+          />
+        </Menu>
+      )}
+    </Appbar.Header>
+  );
+};
+
+export { HeaderProps };
+
+export default Header;
